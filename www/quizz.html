@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/quizz.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="js/quizz.js" defer></script>
+    <title>Quiz</title>
+</head>
+<body>
+<div class="topDiv">
+<button class="quizzBtn" onclick="window.location.href='./index.html'"><i
+        class="fa-solid fa-arrow-left"></i> Retour à l’accueil
+</button>
+<h4 id="pokemonName"></h4>
+</div>
+<h1>Quizz</h1>
+<div id="progression" class="progression">
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+    <span class="pastille"></span>
+</div>
+<h2>Qui est-ce ?</h2>
+<img class="pokemonImage" id="pokemonImage" src="" alt="Pokémon">
+
+<div class="quizzDiv">
+    <input id="pokemonSaisi" class="quizzInput" type="text">
+    <button class="quizzBtn" onclick="validerPokemon()">Valider la saisie</button>
+</div>
+</body>
+</html>
