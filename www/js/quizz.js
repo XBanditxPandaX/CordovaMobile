@@ -9,7 +9,7 @@ function getRandomNumber(min, max) {
 
 async function fetchPokemon() {
     if (questionActuelle >= totalQuestions) {
-        localStorage.setItem("dernierScore", score);
+        saveScoreToFile(score);
         window.location.href = "./classement.html";
         return;
     }
@@ -52,6 +52,22 @@ function validerPokemon(){
     questionActuelle++;
     document.getElementById("pokemonSaisi").value = "";
     fetchPokemon();
+}
+
+function saveScoreToFile(score) {
+    document.addEventListener("deviceready", () => {
+        const data = `Score: ${score}/10 - ${new Date().toLocaleString()}\n`;
+
+        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dir) => {
+            dir.getFile("scores.txt", { create: true }, (file) => {
+                file.createWriter((fileWriter) => {
+                    fileWriter.seek(fileWriter.length);
+                    fileWriter.write(data);
+                    console.log("Score sauvegardé :", data);
+                }, (err) => console.error("Erreur écriture :", err));
+            });
+        });
+    });
 }
 
 document.addEventListener('DOMContentLoaded', fetchPokemon);
