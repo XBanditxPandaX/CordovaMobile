@@ -10,7 +10,6 @@ function getRandomNumber(min, max) {
 async function fetchPokemon() {
     if (questionActuelle >= totalQuestions) {
         saveScoreToFile(score);
-        window.location.href = "./classement.html";
         return;
     }
 
@@ -32,12 +31,18 @@ async function fetchPokemon() {
         document.getElementById("pokemonName").textContent = pokemonName;
         document.getElementById("pokemonImage").src = pokemonImage;
 
+        const btn = document.getElementById("validerBtn");
+        btn.disabled = false;
+
     } catch (error) {
         console.error("Erreur lors de la récupération du Pokémon :", error);
     }
 }
 
 function validerPokemon(){
+    const btn = document.getElementById("validerBtn");
+    btn.disabled = true;
+
     const pokemonSaisi = document.getElementById("pokemonSaisi").value.toLowerCase();
     const pastilles = document.querySelectorAll(".pastille");
 
@@ -55,19 +60,23 @@ function validerPokemon(){
 }
 
 function saveScoreToFile(score) {
-    document.addEventListener("deviceready", () => {
-        const data = `Score: ${score}/10 - ${new Date().toLocaleString()}\n`;
-
-        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dir) => {
-            dir.getFile("scores.txt", { create: true }, (file) => {
-                file.createWriter((fileWriter) => {
-                    fileWriter.seek(fileWriter.length);
-                    fileWriter.write(data);
-                    console.log("Score sauvegardé :", data);
-                }, (err) => console.error("Erreur écriture :", err));
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dirEntry) {
+        dirEntry.getFile("scores.txt", { create: true }, function (fileEntry) {
+            fileEntry.createWriter(function (fileWriter) {
+                fileWriter.seek(fileWriter.length);
+                fileWriter.onwriteend = function() {
+                    console.log("Écriture terminée avec succès");
+                    window.location.href = "./classement.html";
+                };
+                fileWriter.onerror = function(e) {
+                    console.error("Erreur d'écriture :", e);
+                };
+                const blob = new Blob([score + "\n"], { type: "text/plain" });
+                fileWriter.write(blob);
+                console.log("Score sauvegardé :", score);
             });
         });
     });
 }
 
-document.addEventListener('DOMContentLoaded', fetchPokemon);
+document.addEventListener("deviceready", fetchPokemon);

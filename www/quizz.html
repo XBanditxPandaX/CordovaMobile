@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/quizz.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="cordova.js" defer></script>
     <script src="js/quizz.js" defer></script>
     <title>Quiz</title>
 </head>
@@ -34,7 +35,7 @@
 
 <div class="quizzDiv">
     <input id="pokemonSaisi" class="quizzInput" type="text">
-    <button class="quizzBtn" onclick="validerPokemon()">Valider la saisie</button>
+    <button id="validerBtn" class="quizzBtn" onclick="validerPokemon()">Valider la saisie</button>
 </div>
 </body>
 </html>
