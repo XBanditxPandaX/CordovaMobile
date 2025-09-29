@@ -14,14 +14,16 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^14.0.1",
-    "cordova-plugin-file": "^8.1.3"
+    "cordova-plugin-file": "^8.1.3",
+    "cordova-plugin-vibration": "file:cordova-plugin-vibration"
   },
   "cordova": {
     "platforms": [
       "android"
     ],
     "plugins": {
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-vibration": {}
     }
   }
 }

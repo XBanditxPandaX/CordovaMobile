@@ -2,13 +2,26 @@ let pokemonActuel = '';
 let questionActuelle = 0;
 const totalQuestions = 10;
 let score = 0;
+let isCordovaReady = false;
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function safeVibrate(pattern) {
+    if (isCordovaReady && window.Vibration) {
+        Vibration.vibrate(pattern,
+            () => console.log("Vibration réussie"),
+            (err) => console.error("Erreur vibration:", err)
+        );
+    } else {
+        console.log("Cordova pas encore prêt ou Vibration non disponible");
+    }
+}
+
 async function fetchPokemon() {
     if (questionActuelle >= totalQuestions) {
+        safeVibrate([0, 200, 100, 200, 100, 200]);
         saveScoreToFile(score);
         return;
     }
@@ -48,10 +61,12 @@ function validerPokemon(){
 
     if(pokemonSaisi === pokemonActuel){
         pastilles[questionActuelle].style.backgroundColor = "green";
+        safeVibrate([0, 200]);
         score++;
     }
     else{
         pastilles[questionActuelle].style.backgroundColor = "red";
+        safeVibrate([0, 200, 100, 200]);
     }
 
     questionActuelle++;
@@ -79,4 +94,14 @@ function saveScoreToFile(score) {
     });
 }
 
-document.addEventListener("deviceready", fetchPokemon);
+document.addEventListener("deviceready", function() {
+    isCordovaReady = true;
+
+    if (window.Vibration) {
+        console.log("Plugin Vibration chargé");
+    } else {
+        console.error("Plugin Vibration non disponible");
+    }
+
+    fetchPokemon();
+});
