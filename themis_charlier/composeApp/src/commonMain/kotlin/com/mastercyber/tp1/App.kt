@@ -13,17 +13,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import tpkotlinmm.composeapp.generated.resources.Res
-import tpkotlinmm.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
+        var name by remember { mutableStateOf<String?>(null) }
+        var sprite by remember { mutableStateOf<ByteArray?>(null) }
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -35,13 +33,21 @@ fun App() {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
+                LaunchedEffect(showContent) {
+                    if (showContent) {
+                        name = Greeting().fetchPokemonName()
+                        sprite = Greeting().fetchPokemonSprite()
+                    }
+                }
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+//                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    sprite?.toImageBitmap()?.let {
+                        Image(bitmap = it, null)
+                    }
+                    Text("Compose: $name")
                 }
             }
         }
