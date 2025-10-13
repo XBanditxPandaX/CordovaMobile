@@ -1,0 +1,87 @@
+.quizzDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+img {
+    display: flex;
+    justify-content: center;
+}
+
+.topDiv {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.quizzBtn {
+    display: block;
+    width: 110px;
+    height: 35px;
+    margin: 15px 0;
+    font-size: 11px;
+    color: #fff;
+    background-color: #8000ff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.quizzBtn:hover {
+    background-color: #5a00b3;
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 42px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.pokemonImage {
+    max-height: 400px;
+    max-width: 400px;
+    filter: grayscale(100%);
+}
+
+.quizzInput {
+     width: 250px;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 2px solid #8000ff;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.quizzInput:focus {
+    border-color: #5a00b3;
+    box-shadow: 0 0 6px rgba(128, 0, 255, 0.6);
+}
+
+.progression {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.pastille {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    display: inline-block;
+}

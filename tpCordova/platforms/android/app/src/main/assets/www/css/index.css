@@ -1,0 +1,44 @@
+.menuTitle {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.menuBtnDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    text-align: center;
+}
+
+.menuBtn {
+    display: block;
+    width: 200px;
+    height: 60px;
+    margin: 15px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #8000ff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.menuBtn:hover {
+    background-color: #5a00b3;
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 42px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
