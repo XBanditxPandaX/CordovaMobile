@@ -43,7 +43,28 @@ class Greeting {
         return null
     }
 
+    suspend fun fetchPokemon(): Pair<String?, ByteArray?> {
+        val random = (1..1025).random()
+        val response: Pokemon =
+            client.get("https://tyradex.vercel.app/api/v1/pokemon/$random").body()
+        val name = response.name?.fr ?: "Unknown"
+        val spriteUrl = response.sprites?.regular
+
+        val sprite: ByteArray? = if (spriteUrl != null) {
+            client.get(spriteUrl).body()
+        } else {
+            null
+        }
+
+        client.close()
+        return Pair(name, sprite)
+    }
+
     fun greet(): String {
         return "Hello, ${platform.name}!"
+    }
+
+    fun guessPokemon (name : String?, guess: String) : Boolean {
+        return name?.lowercase() == guess.lowercase()
     }
 }

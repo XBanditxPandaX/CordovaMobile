@@ -1,0 +1,6 @@
+# flow.yaml
+
+appId: com.mastercyber.tp1
+---
+- launchApp
+- tapOn: "Click me!"
